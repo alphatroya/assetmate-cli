@@ -12,6 +12,9 @@ struct Response: Decodable {
 
     struct RGB: Decodable {
         let fraction: FractionRGB
+        let r: Int
+        let g: Int
+        let b: Int
     }
 
     struct FractionRGB: Decodable {
@@ -20,33 +23,21 @@ struct Response: Decodable {
         let b: Double
     }
 
+    struct Hex: Decodable {
+        let value: String
+        let clean: String
+    }
+
     let name: Name
+    let hex: Hex
     let rgb: RGB
 }
 
-extension Response.FractionRGB {
-    var json: String {
-        """
-        {
-          "info" : {
-            "version" : 1,
-            "author" : "xcode"
-          },
-          "colors" : [
-            {
-              "color" : {
-                "color-space" : "srgb",
-                "components" : {
-                  "green" : "\(g)",
-                  "alpha" : "1.000",
-                  "blue" : "\(b)",
-                  "red" : "\(r)"
-                }
-              },
-              "idiom" : "universal"
-            }
-          ]
-        }
-        """
+extension Response {
+    var json: Data? {
+        let encoder = JSONEncoder()
+        return try? encoder.encode(
+            ColorAsset(self)
+        )
     }
 }

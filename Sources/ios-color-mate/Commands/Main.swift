@@ -8,6 +8,6 @@ import ArgumentParser
 struct Main: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A CLI helper for working with HEX colors in iOS projects",
-        subcommands: [Identify.self, Generate.self]
+        subcommands: [Identify.self, Generate.self, Inspect.self]
     )
 }

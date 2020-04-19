@@ -9,7 +9,7 @@ struct Identify: ParsableCommand {
         abstract: "Identify given hex color name"
     )
 
-    @Argument(help: "HEX string with # prefix")
+    @Argument(help: "HEX string without # prefix")
     var hex: HEX
 
     func run() throws {
