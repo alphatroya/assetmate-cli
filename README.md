@@ -1,3 +1,3 @@
-# ios-color-mate
+# Asset Mate
 
-A description of this package.
+A small CLI helper for working with XCode Assets
