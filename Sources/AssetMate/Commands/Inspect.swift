@@ -18,6 +18,9 @@ struct Inspect: ParsableCommand {
     @Argument(help: "HEX string without # prefix")
     var hex: HEX
 
+    @Argument(default: 3, help: "Tolerance for color comparison")
+    var tolerance: Int
+
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
     var asset: String
 
@@ -48,13 +51,14 @@ struct Inspect: ParsableCommand {
             guard let firstAsset = colorAsset.colors.first else {
                 continue
             }
-            guard let fullHex = firstAsset.color.components.joined else {
+            guard firstAsset.color.components.isHex else {
                 if verbose {
                     print("Skip \(directory), isn't hex represented unit")
                 }
                 continue
             }
-            if fullHex == hex, let name = directory.lastPathComponent.components(separatedBy: ".").first {
+            if firstAsset.color.components.compare(with: hex, tolerance: tolerance),
+                let name = directory.lastPathComponent.components(separatedBy: ".").first {
                 if verbose {
                     print("Found directory: \(directory)")
                 } else {

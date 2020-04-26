@@ -47,14 +47,29 @@ struct ColorAsset: Codable {
         let blue: String
         let red: String
 
-        var joined: String? {
-            guard self.red.hasPrefix("0x"), self.green.hasPrefix("0x"), self.blue.hasPrefix("0x") else {
-                return nil
+        var isHex: Bool {
+            guard red.hasPrefix("0x"), green.hasPrefix("0x"), blue.hasPrefix("0x") else {
+                return false
             }
-            let red = self.red.dropFirst(2)
-            let green = self.green.dropFirst(2)
-            let blue = self.blue.dropFirst(2)
-            return String(red + green + blue)
+            return true
+        }
+
+        func compare(with hex: HEX, tolerance: Int) -> Bool {
+            guard let oRed = Int(red.dropFirst(2), radix: 16),
+                let oGreen = Int(green.dropFirst(2), radix: 16),
+                let oBlue = Int(blue.dropFirst(2), radix: 16) else {
+                return false
+            }
+
+            guard let red = hex.red,
+                let green = hex.green,
+                let blue = hex.blue else {
+                return false
+            }
+
+            return abs(oRed - red) <= tolerance &&
+                abs(oGreen - green) <= tolerance &&
+                abs(oBlue - blue) <= tolerance
         }
     }
 
