@@ -18,7 +18,7 @@ struct Inspect: ParsableCommand {
     @Argument(help: "HEX string without # prefix")
     var hex: HEX
 
-    @Argument(default: 3, help: "Tolerance for color comparison")
+    @Option(name: .shortAndLong, default: 3, help: "Tolerance for color comparison")
     var tolerance: Int
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
