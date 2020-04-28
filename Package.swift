@@ -6,7 +6,7 @@ let package = Package(
     name: "ios-color-mate",
     platforms: [.macOS(.v10_12)],
     products: [
-        .executable(name: "AssetMate", targets: ["AssetMate"]),
+        .executable(name: "assetmate", targets: ["AssetMate"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.0.2")),

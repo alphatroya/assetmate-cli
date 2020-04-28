@@ -1,4 +1,23 @@
+prefix ?= /usr/local
+bindir = $(prefix)/bin
+
 all: bootstrap
+
+## build: launch build
+build:
+	swift build -c release --disable-sandbox
+
+## install: install the application
+install: build
+	install ".build/release/assetmate" "$(bindir)"
+
+## uninstall: remove application
+uninstall:
+	rm -rf "$(bindir)/assetmate"
+
+## clean: clean build artefacts
+clean:
+	rm -rf .build
 
 ## bootstrap: Bootstrap project dependencies for development
 bootstrap: hook
@@ -16,10 +35,6 @@ test:
 fmt:
 	mint run swiftformat swiftformat Sources Tests
 
-## clean: Clean all git ignored files
-clean:
-	git clean -Xfd
-
 ## hook: Install git pre-commit hook
 hook:
 	curl "https://gist.githubusercontent.com/alphatroya/884aef2590d3c873d4f0d447d6a95a3c/raw/8a2682772cf9a7625b680771cf9ad9106c6cf00e/pre-commit" > .git/hooks/pre-commit
@@ -30,4 +45,4 @@ help:
 	@echo "Usage: \n"
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/ /'
 
-.PHONY: all help bootstrap test fmt hook clean
+.PHONY: build install uninstall clean help bootstrap test fmt hook
