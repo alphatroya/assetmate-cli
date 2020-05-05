@@ -15,7 +15,7 @@ install: build
 uninstall:
 	rm -rf "$(bindir)/assetmate"
 
-## clean: clean build artefacts
+## clean: clean build artifacts
 clean:
 	rm -rf .build
 
