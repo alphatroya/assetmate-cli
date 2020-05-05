@@ -47,18 +47,38 @@ struct ColorAsset: Codable {
         let blue: String
         let red: String
 
-        var isHex: Bool {
-            guard red.hasPrefix("0x"), green.hasPrefix("0x"), blue.hasPrefix("0x") else {
-                return false
-            }
-            return true
-        }
-
         func compare(with hex: HEX, tolerance: Int) -> Bool {
-            guard let oRed = Int(red.dropFirst(2), radix: 16),
-                let oGreen = Int(green.dropFirst(2), radix: 16),
-                let oBlue = Int(blue.dropFirst(2), radix: 16) else {
-                return false
+            let oRed: Int
+            let oGreen: Int
+            let oBlue: Int
+
+            if isHex {
+                guard let hRed = Int(red.dropFirst(2), radix: 16),
+                    let hGreen = Int(green.dropFirst(2), radix: 16),
+                    let hBlue = Int(blue.dropFirst(2), radix: 16) else {
+                    return false
+                }
+                oRed = hRed
+                oGreen = hGreen
+                oBlue = hBlue
+            } else if isFloat {
+                guard let fRed = Double(red),
+                    let fGreen = Double(green),
+                    let fBlue = Double(blue) else {
+                    return false
+                }
+                oRed = Int(fRed * 255)
+                oGreen = Int(fGreen * 255)
+                oBlue = Int(fBlue * 255)
+            } else {
+                guard let iRed = Int(red),
+                    let iGreen = Int(green),
+                    let iBlue = Int(blue) else {
+                    return false
+                }
+                oRed = iRed
+                oGreen = iGreen
+                oBlue = iBlue
             }
 
             guard let red = hex.red,
@@ -70,6 +90,20 @@ struct ColorAsset: Codable {
             return abs(oRed - red) <= tolerance &&
                 abs(oGreen - green) <= tolerance &&
                 abs(oBlue - blue) <= tolerance
+        }
+
+        private var isHex: Bool {
+            guard red.hasPrefix("0x"), green.hasPrefix("0x"), blue.hasPrefix("0x") else {
+                return false
+            }
+            return true
+        }
+
+        private var isFloat: Bool {
+            guard red.hasPrefix("0."), green.hasPrefix("0."), blue.hasPrefix("0.") else {
+                return false
+            }
+            return true
         }
     }
 

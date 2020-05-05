@@ -51,12 +51,6 @@ struct Inspect: ParsableCommand {
             guard let firstAsset = colorAsset.colors.first else {
                 continue
             }
-            guard firstAsset.color.components.isHex else {
-                if verbose {
-                    print("Skip \(directory), isn't hex represented unit")
-                }
-                continue
-            }
             if firstAsset.color.components.compare(with: hex, tolerance: tolerance),
                 let name = directory.lastPathComponent.components(separatedBy: ".").first {
                 if verbose {
