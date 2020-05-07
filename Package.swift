@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ios-color-mate",
+    name: "assetmate",
     platforms: [.macOS(.v10_12)],
     products: [
         .executable(name: "assetmate", targets: ["AssetMate"]),
