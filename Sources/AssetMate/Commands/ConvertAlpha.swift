@@ -7,7 +7,7 @@ import ArgumentParser
 
 struct ConvertAlpha: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Get result color for foreground color placed on background with given alpha using linear interpolation"
+        abstract: "Calculate color for foreground color placed on background with given alpha using linear interpolation"
     )
 
     @Option(name: .shortAndLong, default: "000000", help: "Foreground color")
