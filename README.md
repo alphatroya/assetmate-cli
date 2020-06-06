@@ -20,6 +20,6 @@ Add a new *.pdf resource to the Assets.xcassets folder.
 
 ## Convert alpha
 
-Convert foreground color on placed on background with given alpha using linear interpolation.
+Convert foreground color mixed with background with given alpha using linear interpolation.
 For cases when designers use alpha value with black colors for color adjustments.
 
