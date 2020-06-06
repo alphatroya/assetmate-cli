@@ -17,3 +17,9 @@ Look out for a given color in the Assets.xcassets folder and print its name if f
 ## Add
 
 Add a new *.pdf resource to the Assets.xcassets folder.
+
+## Convert alpha
+
+Convert foreground color on placed on background with given alpha using linear interpolation.
+For cases when designers use alpha value on black colors for color adjustments.
+
