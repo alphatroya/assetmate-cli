@@ -11,6 +11,6 @@ struct Version: ParsableCommand {
     )
 
     func run() throws {
-        print("0.0.12")
+        print("0.0.13")
     }
 }
