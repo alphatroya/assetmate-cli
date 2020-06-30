@@ -10,11 +10,11 @@ struct ConvertAlpha: ParsableCommand {
         abstract: "Convert foreground color mixed with background with given alpha using linear interpolation"
     )
 
-    @Option(name: .shortAndLong, default: "000000", help: "Foreground color")
-    var foreground: HEX
+    @Option(name: .shortAndLong, help: "Foreground color")
+    var foreground: HEX = "000000"
 
-    @Option(name: .shortAndLong, default: "FFFFFF", help: "Background color")
-    var background: HEX
+    @Option(name: .shortAndLong, help: "Background color")
+    var background: HEX = "FFFFFF"
 
     @Option(name: .shortAndLong, help: "Alpha value")
     var alpha: Float

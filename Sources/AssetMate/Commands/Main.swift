@@ -12,6 +12,7 @@ struct Main: ParsableCommand {
             Add.self,
             ConvertAlpha.self,
             Generate.self,
+            Group.self,
             Identify.self,
             Inspect.self,
             Version.self,
