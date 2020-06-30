@@ -22,7 +22,7 @@ struct Generate: ParsableCommand {
     var output: String
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
-    var verbose: Bool
+    var verbose: Bool = false
 
     func run() throws {
         try hex.validate()

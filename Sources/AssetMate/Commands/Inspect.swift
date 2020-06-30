@@ -18,14 +18,14 @@ struct Inspect: ParsableCommand {
     @Argument(help: "HEX string without # prefix")
     var hex: HEX
 
-    @Option(name: .shortAndLong, default: 3, help: "Tolerance for color comparison")
-    var tolerance: Int
+    @Option(name: .shortAndLong, help: "Tolerance for color comparison")
+    var tolerance: Int = 3
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
     var asset: String
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
-    var verbose: Bool
+    var verbose: Bool = false
 
     func run() throws {
         let folderURL = URL(fileURLWithPath: asset)

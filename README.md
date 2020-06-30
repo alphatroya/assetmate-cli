@@ -23,3 +23,7 @@ Add a new *.pdf resource to the Assets.xcassets folder.
 Convert foreground color mixed with background with given alpha using linear interpolation.
 For cases when designers use alpha value with black colors for color adjustments.
 
+## Group
+
+Group all color assets in the separate folder.
+
