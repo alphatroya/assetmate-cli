@@ -15,7 +15,16 @@ struct Main: ParsableCommand {
             Group.self,
             Identify.self,
             Inspect.self,
-            Version.self,
         ]
     )
+
+    @Flag(name: .shortAndLong, help: "Print tool version")
+    var version: Bool = false
+
+    func run() throws {
+        guard version else {
+            throw CleanExit.helpRequest(Main.self)
+        }
+        print("0.0.15")
+    }
 }
