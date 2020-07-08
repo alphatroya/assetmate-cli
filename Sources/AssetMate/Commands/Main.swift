@@ -25,6 +25,6 @@ struct Main: ParsableCommand {
         guard version else {
             throw CleanExit.helpRequest(Main.self)
         }
-        print("0.0.15")
+        print("0.0.16")
     }
 }

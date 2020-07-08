@@ -12,7 +12,7 @@ struct Group: ParsableCommand {
     )
 
     @Option(name: .shortAndLong, help: "Name for a color folder")
-    var folder: String = "Color"
+    var folder: String = "Colors"
 
     @Option(name: .shortAndLong, help: "Path to the Assets.xcassets folder")
     var assets: String
