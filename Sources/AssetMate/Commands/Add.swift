@@ -31,7 +31,7 @@ struct Add: ParsableCommand {
     @Argument(help: "Path to the pdf file")
     var file: String
 
-    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
+    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
     var output: String
 
     @Option(name: .shortAndLong, help: "Name for a image asset")

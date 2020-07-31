@@ -3,4 +3,4 @@
 // Copyright © 2020 Alexey Korolev <alphatroya@gmail.com>
 //
 
-Main.main()
+Assetmate.main()
