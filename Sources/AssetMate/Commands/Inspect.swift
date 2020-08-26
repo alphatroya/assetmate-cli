@@ -21,7 +21,7 @@ struct Inspect: ParsableCommand {
     @Option(name: .shortAndLong, help: "Tolerance for color comparison")
     var tolerance: Int = 3
 
-    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
+    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .file())
     var asset: String
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
