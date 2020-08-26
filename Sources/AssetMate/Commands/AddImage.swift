@@ -23,9 +23,9 @@ struct ImageAsset: Encodable {
     }
 }
 
-struct Add: ParsableCommand {
+struct AddImage: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Add given .pdf file to the Asset folder"
+        abstract: "Add given .pdf file to the Asset catalog"
     )
 
     @Argument(help: "Path to the pdf file", completion: .file(extensions: ["pdf"]))

@@ -9,9 +9,9 @@ struct Assetmate: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A CLI helper for working with Asset.xcassets folder in iOS projects",
         subcommands: [
-            Add.self,
+            AddColor.self,
+            AddImage.self,
             ConvertAlpha.self,
-            Generate.self,
             Group.self,
             Identify.self,
             Inspect.self,
@@ -25,6 +25,6 @@ struct Assetmate: ParsableCommand {
         guard version else {
             throw CleanExit.helpRequest(Assetmate.self)
         }
-        print("0.0.21")
+        print("0.0.22")
     }
 }
