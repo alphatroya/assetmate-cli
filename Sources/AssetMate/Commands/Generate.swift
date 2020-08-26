@@ -18,6 +18,9 @@ struct Generate: ParsableCommand {
     @Argument(help: "HEX string without # prefix")
     var hex: HEX
 
+    @Option(help: "Name for color asset")
+    var name: String?
+
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
     var output: String
 
@@ -37,7 +40,7 @@ struct Generate: ParsableCommand {
         }
 
         let folderURL = URL(fileURLWithPath: output)
-        let name = response.name.value.kebab
+        let name = self.name ?? response.name.value.kebab
         let assetFolder = folderURL.appendingPathComponent(name + ".colorset")
 
         let fileManager = FileManager.default
