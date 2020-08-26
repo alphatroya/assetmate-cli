@@ -6,13 +6,13 @@
 import ArgumentParser
 import Foundation
 
-enum GenerateError: Error {
+enum AddColorError: Error {
     case wrongDataGeneration
 }
 
-struct Generate: ParsableCommand {
+struct AddColor: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Generate color asset from the given hex string"
+        abstract: "Request color name for the given hex description and add it to the Asset catalog"
     )
 
     @Argument(help: "HEX string without # prefix")
@@ -36,7 +36,7 @@ struct Generate: ParsableCommand {
         }
 
         guard let data = response.json else {
-            throw GenerateError.wrongDataGeneration
+            throw AddColorError.wrongDataGeneration
         }
 
         let folderURL = URL(fileURLWithPath: output)

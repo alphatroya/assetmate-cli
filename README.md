@@ -6,15 +6,15 @@ A couple of helpful tools for a working with assets in the XCode project.
 
 Find a pretty name for a HEX color using www.thecolorapi.com API.
 
-## Generate
+## Add color
 
-Use name for a color from previous command and add it to the output Assets.xcassets folder.
+Use name for a color from previous command and add it to the Assets.xcassets folder.
 
 ## Inspect
 
-Look out for a given color in the Assets.xcassets folder and print its name if founded.
+Search for a given color in the Assets.xcassets folder and print its name if founded.
 
-## Add
+## Add image
 
 Add a new *.pdf resource to the Assets.xcassets folder.
 
