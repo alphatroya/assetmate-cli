@@ -25,6 +25,6 @@ struct Assetmate: ParsableCommand {
         guard version else {
             throw CleanExit.helpRequest(Assetmate.self)
         }
-        print("0.0.18")
+        print("0.0.19")
     }
 }
