@@ -28,7 +28,7 @@ struct Add: ParsableCommand {
         abstract: "Add given .pdf file to the Asset folder"
     )
 
-    @Argument(help: "Path to the pdf file")
+    @Argument(help: "Path to the pdf file", completion: .file(extensions: ["pdf"]))
     var file: String
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
