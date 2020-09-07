@@ -37,6 +37,9 @@ struct AddImage: ParsableCommand {
     @Option(name: .shortAndLong, help: "Name for a image asset")
     var name: String
 
+    @Flag(name: .shortAndLong, help: "Should overwrite file if it is exists")
+    var force = false
+
     func run() throws {
         guard file.hasSuffix(".pdf") else {
             throw ValidationError("That command support only pdf files")
@@ -46,8 +49,13 @@ struct AddImage: ParsableCommand {
             .appendingPathComponent(name)
             .appendingPathExtension("imageset")
         let manager = FileManager.default
-        guard !manager.fileExists(atPath: folder.path) else {
-            throw ValidationError("Folder \(name) did exist in Asset catalog")
+        if manager.fileExists(atPath: folder.path) {
+            if !force {
+                print("Folder \(name) already exists in Asset catalog")
+                throw ExitCode(1)
+            } else {
+                try manager.removeItem(at: folder)
+            }
         }
         try manager.createDirectory(at: folder, withIntermediateDirectories: true)
         let pdf = name + ".pdf"
