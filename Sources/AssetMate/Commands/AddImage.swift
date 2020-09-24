@@ -25,10 +25,10 @@ struct ImageAsset: Encodable {
 
 struct AddImage: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Add given .pdf file to the Asset catalog"
+        abstract: "Add given pdf or svg file to the Asset catalog"
     )
 
-    @Argument(help: "Path to the pdf file", completion: .file(extensions: ["pdf"]))
+    @Argument(help: "Path to the pdf or svg file", completion: .file(extensions: ["pdf", "svg"]))
     var file: String
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
@@ -41,8 +41,10 @@ struct AddImage: ParsableCommand {
     var force = false
 
     func run() throws {
-        guard file.hasSuffix(".pdf") else {
-            throw ValidationError("That command support only pdf files")
+        let pdf = ".pdf"
+        let svg = ".svg"
+        guard file.hasSuffix(pdf) || file.hasSuffix(svg) else {
+            throw ValidationError("That command support only pdf or svg files")
         }
 
         let folder = URL(fileURLWithPath: output)
@@ -58,12 +60,13 @@ struct AddImage: ParsableCommand {
             }
         }
         try manager.createDirectory(at: folder, withIntermediateDirectories: true)
-        let pdf = name + ".pdf"
-        let meta = ImageAsset(imageName: pdf)
+        let fileExtension = file.hasSuffix(pdf) ? pdf : svg
+        let imagePath = name + fileExtension
+        let meta = ImageAsset(imageName: imagePath)
         let jsonEncoder = JSONEncoder()
         let data = try jsonEncoder.encode(meta)
         try data.write(to: folder.appendingPathComponent("Contents.json"))
 
-        try manager.moveItem(at: URL(fileURLWithPath: file), to: folder.appendingPathComponent(pdf))
+        try manager.moveItem(at: URL(fileURLWithPath: file), to: folder.appendingPathComponent(imagePath))
     }
 }
