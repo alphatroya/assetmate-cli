@@ -10,12 +10,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.2.1")),
+        .package(url: "https://github.com/jpsim/Yams", .upToNextMinor(from: "4.0.0")),
     ],
     targets: [
         .target(
             name: "AssetMate",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "Yams",
             ]
         ),
         .testTarget(

@@ -21,8 +21,8 @@ struct AddColor: ParsableCommand {
     @Option(help: "Name for color asset")
     var name: String?
 
-    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder")
-    var output: String
+    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
+    var asset: Asset?
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
     var verbose: Bool = false
@@ -39,7 +39,8 @@ struct AddColor: ParsableCommand {
             throw AddColorError.wrongDataGeneration
         }
 
-        let folderURL = URL(fileURLWithPath: output)
+        let config = try load(asset)
+        let folderURL = URL(fileURLWithPath: config.asset)
         let name = self.name ?? response.name.value.kebab
         let assetFolder = folderURL.appendingPathComponent(name + ".colorset")
 
@@ -53,3 +54,5 @@ struct AddColor: ParsableCommand {
         }
     }
 }
+
+extension AddColor: AssetConfigLoader {}
