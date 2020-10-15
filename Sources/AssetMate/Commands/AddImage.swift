@@ -32,7 +32,7 @@ struct AddImage: ParsableCommand {
     var file: String
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
-    var output: String
+    var asset: Asset?
 
     @Option(name: .shortAndLong, help: "Name for a image asset")
     var name: String
@@ -47,7 +47,8 @@ struct AddImage: ParsableCommand {
             throw ValidationError("That command support only pdf or svg files")
         }
 
-        let folder = URL(fileURLWithPath: output)
+        let config = try self.load(asset)
+        let folder = URL(fileURLWithPath: config.asset)
             .appendingPathComponent(name)
             .appendingPathExtension("imageset")
         let manager = FileManager.default
@@ -70,3 +71,5 @@ struct AddImage: ParsableCommand {
         try manager.moveItem(at: URL(fileURLWithPath: file), to: folder.appendingPathComponent(imagePath))
     }
 }
+
+extension AddImage: AssetConfigLoader {}

@@ -21,14 +21,15 @@ struct Inspect: ParsableCommand {
     @Option(name: .shortAndLong, help: "Tolerance for color comparison")
     var tolerance: Int = 3
 
-    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .file())
-    var asset: String
+    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
+    var asset: Asset?
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
     var verbose: Bool = false
 
     func run() throws {
-        let folderURL = URL(fileURLWithPath: asset)
+        let config = try load(asset)
+        let folderURL = URL(fileURLWithPath: config.asset)
 
         let fileManager = FileManager.default
         guard let enumerator = fileManager.enumerator(
@@ -64,3 +65,5 @@ struct Inspect: ParsableCommand {
         throw ExitCode(1)
     }
 }
+
+extension Inspect: AssetConfigLoader {}
