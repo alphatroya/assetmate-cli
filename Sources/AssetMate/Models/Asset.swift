@@ -1,5 +1,6 @@
 //
-// Created by Alexey Korolev on 15.10.2020.
+// AssetMate
+// 2021 Alexey Korolev <alphatroya@gmail.com>
 //
 
 typealias Asset = String

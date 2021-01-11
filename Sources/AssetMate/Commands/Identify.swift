@@ -1,6 +1,6 @@
 //
-// iOS Color Mate
-// Copyright © 2020 Alexey Korolev <alphatroya@gmail.com>
+// AssetMate
+// 2021 Alexey Korolev <alphatroya@gmail.com>
 //
 
 import ArgumentParser
@@ -21,7 +21,7 @@ struct Identify: ParsableCommand {
         case let .success(data):
             print(data.name.value)
         case let .failure(error):
-            print(error.localizedDescription)
+            print(error.localizedDescription, to: &stdErr)
         }
     }
 }
