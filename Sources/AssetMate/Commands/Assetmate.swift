@@ -1,6 +1,6 @@
 //
-// iOS Color Mate
-// Copyright © 2020 Alexey Korolev <alphatroya@gmail.com>
+// AssetMate
+// 2021 Alexey Korolev <alphatroya@gmail.com>
 //
 
 import ArgumentParser
@@ -8,7 +8,7 @@ import ArgumentParser
 struct Assetmate: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A CLI helper for working with Asset.xcassets folder in iOS projects",
-        version: "0.0.26",
+        version: "0.0.27",
         subcommands: [
             AddColor.self,
             AddImage.self,

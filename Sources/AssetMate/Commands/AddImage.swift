@@ -1,6 +1,6 @@
 //
-// iOS Color Mate
-// Copyright © 2020 Alexey Korolev <alphatroya@gmail.com>
+// AssetMate
+// 2021 Alexey Korolev <alphatroya@gmail.com>
 //
 
 import ArgumentParser
@@ -47,14 +47,14 @@ struct AddImage: ParsableCommand {
             throw ValidationError("That command support only pdf or svg files")
         }
 
-        let config = try self.load(asset)
+        let config = try load(asset)
         let folder = URL(fileURLWithPath: config.asset)
             .appendingPathComponent(name)
             .appendingPathExtension("imageset")
         let manager = FileManager.default
         if manager.fileExists(atPath: folder.path) {
             if !force {
-                print("Folder \(name) already exists in Asset catalog")
+                print("Folder \(name) already exists in Asset catalog", to: &stdErr)
                 throw ExitCode(1)
             } else {
                 try manager.removeItem(at: folder)
