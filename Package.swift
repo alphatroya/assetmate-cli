@@ -9,7 +9,7 @@ let package = Package(
         .executable(name: "assetmate", targets: ["AssetMate"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.2.1")),
+        .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.1")),
         .package(url: "https://github.com/jpsim/Yams", .upToNextMinor(from: "4.0.0")),
     ],
     targets: [
