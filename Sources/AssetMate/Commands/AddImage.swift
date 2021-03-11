@@ -26,7 +26,7 @@ struct ImageAsset: Encodable {
 
 struct AddImage: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Add given pdf or svg file to the Asset catalog"
+        abstract: "Add given pdf or svg (origin or zip archived) file to the Asset catalog"
     )
 
     @Argument(help: "Path to the pdf, svg or zip file", completion: .file(extensions: ["pdf", "svg", "zip"]))
