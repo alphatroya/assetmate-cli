@@ -5,6 +5,7 @@
 
 import ArgumentParser
 import Foundation
+import Zip
 
 struct ImageAsset: Encodable {
     struct Image: Encodable {
@@ -28,7 +29,7 @@ struct AddImage: ParsableCommand {
         abstract: "Add given pdf or svg file to the Asset catalog"
     )
 
-    @Argument(help: "Path to the pdf or svg file", completion: .file(extensions: ["pdf", "svg"]))
+    @Argument(help: "Path to the pdf, svg or zip file", completion: .file(extensions: ["pdf", "svg", "zip"]))
     var file: String
 
     @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
@@ -40,7 +41,21 @@ struct AddImage: ParsableCommand {
     @Flag(name: .shortAndLong, help: "Should overwrite file if it is exists")
     var force = false
 
+    @Flag(name: .long, help: "Should origin zip file be removed after success")
+    var cleanup = false
+
     func run() throws {
+        var file = self.file
+        var unzipFolder: URL?
+        if file.hasSuffix(".zip") {
+            (file, unzipFolder) = try unzipFiles(file)
+        }
+        defer {
+            if let rmFolder = unzipFolder {
+                try? FileManager.default.removeItem(at: rmFolder)
+            }
+        }
+
         let pdf = ".pdf"
         let svg = ".svg"
         guard file.hasSuffix(pdf) || file.hasSuffix(svg) else {
@@ -69,6 +84,24 @@ struct AddImage: ParsableCommand {
         try data.write(to: folder.appendingPathComponent("Contents.json"))
 
         try manager.moveItem(at: URL(fileURLWithPath: file), to: folder.appendingPathComponent(imagePath))
+        if unzipFolder != nil, cleanup {
+            try? FileManager.default.removeItem(atPath: self.file)
+        }
+    }
+
+    private func unzipFiles(_ file: String) throws -> (newPath: String, folderToRemove: URL) {
+        let url = URL(fileURLWithPath: file)
+        let tmpFolder = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent(url.lastPathComponent.replacingOccurrences(of: "." + url.pathExtension, with: ""))
+        try Zip.unzipFile(url, destination: tmpFolder, overwrite: true, password: nil)
+        let enumerator = FileManager.default.enumerator(at: tmpFolder, includingPropertiesForKeys: nil)
+        while let element = enumerator?.nextObject() as? URL {
+            if element.absoluteString.hasSuffix(".pdf") || element.absoluteString.hasSuffix(".svg") {
+                return (element.path, tmpFolder)
+            }
+        }
+        print("Zip file \(file) did not have any svg or pdf files", to: &stdErr)
+        throw ExitCode(1)
     }
 }
 

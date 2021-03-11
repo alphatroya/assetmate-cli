@@ -11,6 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "0.4.1")),
         .package(url: "https://github.com/jpsim/Yams", .upToNextMinor(from: "4.0.0")),
+        .package(url: "https://github.com/marmelroy/Zip", .upToNextMinor(from: "2.1.1")),
     ],
     targets: [
         .target(
@@ -18,6 +19,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 "Yams",
+                "Zip",
             ]
         ),
         .testTarget(

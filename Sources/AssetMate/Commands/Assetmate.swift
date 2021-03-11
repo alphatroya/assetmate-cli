@@ -8,7 +8,7 @@ import ArgumentParser
 struct Assetmate: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A CLI helper for working with Asset.xcassets folder in iOS projects",
-        version: "0.0.28",
+        version: "0.0.29",
         subcommands: [
             AddColor.self,
             AddImage.self,
