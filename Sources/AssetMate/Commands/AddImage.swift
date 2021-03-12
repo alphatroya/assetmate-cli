@@ -41,8 +41,8 @@ struct AddImage: ParsableCommand {
     @Flag(name: .shortAndLong, help: "Should overwrite file if it is exists")
     var force = false
 
-    @Flag(name: .long, help: "Should origin zip file be removed after success")
-    var cleanup = false
+    @Flag(name: .shortAndLong, help: "Should origin file not be removed after success")
+    var keep = false
 
     func run() throws {
         var file = self.file
@@ -83,9 +83,22 @@ struct AddImage: ParsableCommand {
         let data = try jsonEncoder.encode(meta)
         try data.write(to: folder.appendingPathComponent("Contents.json"))
 
-        try manager.moveItem(at: URL(fileURLWithPath: file), to: folder.appendingPathComponent(imagePath))
-        if unzipFolder != nil, cleanup {
-            try? FileManager.default.removeItem(atPath: self.file)
+        try completeTransaction(
+            origin: URL(fileURLWithPath: file),
+            destination: folder.appendingPathComponent(imagePath),
+            removeOriginZip: unzipFolder != nil
+        )
+    }
+
+    private func completeTransaction(origin: URL, destination: URL, removeOriginZip: Bool) throws {
+        let manager = FileManager.default
+        if !keep {
+            try manager.moveItem(at: origin, to: destination)
+            if removeOriginZip {
+                try manager.removeItem(atPath: file)
+            }
+        } else {
+            try manager.copyItem(at: origin, to: destination)
         }
     }
 
