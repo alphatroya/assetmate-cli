@@ -16,7 +16,7 @@ Search for a given color in the Assets.xcassets folder and print its name if fou
 
 ## Add image
 
-Add a new pdf or svg resource to the Assets.xcassets folder.
+Add a new pdf or svg (standalone or zip archived) resource to the Assets.xcassets folder.
 
 ## Convert alpha
 
