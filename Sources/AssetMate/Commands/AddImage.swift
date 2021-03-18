@@ -7,23 +7,6 @@ import ArgumentParser
 import Foundation
 import Zip
 
-struct ImageAsset: Encodable {
-    struct Image: Encodable {
-        let filename: String
-        let idiom: String
-    }
-
-    let images: [Image]
-    let info: ColorAsset.Info
-
-    init(imageName: String) {
-        images = [
-            .init(filename: imageName, idiom: "universal"),
-        ]
-        info = .init(version: 1, author: "xcode")
-    }
-}
-
 struct AddImage: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "Add given pdf or svg (origin or zip archived) file to the Asset catalog"

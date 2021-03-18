@@ -17,6 +17,9 @@ struct Group: ParsableCommand {
     @Option(name: .shortAndLong, help: "Path to the Assets.xcassets folder")
     var asset: Asset?
 
+    @Flag(name: .long, inversion: .prefixedEnableDisable, help: "Enable \"Provides Namespace\" option for a folder")
+    var namespace: Bool = true
+
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
     var verbose: Bool = false
 
@@ -30,6 +33,7 @@ struct Group: ParsableCommand {
         }
         let originFolder = URL(fileURLWithPath: config.asset)
         let newFolder = originFolder.appendingPathComponent(folder)
+        try createContentsJson(at: newFolder)
         try manager.createDirectory(at: newFolder, withIntermediateDirectories: true)
         for file in inputFiles {
             if verbose {
@@ -37,6 +41,13 @@ struct Group: ParsableCommand {
             }
             try manager.moveItem(at: originFolder.appendingPathComponent(file), to: newFolder.appendingPathComponent(file))
         }
+    }
+
+    private func createContentsJson(at newFolder: URL) throws {
+        let groupAsset = GroupAsset(withNamespaces: namespace)
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(groupAsset)
+        try data.write(to: newFolder.appendingPathComponent("Contents.json"))
     }
 }
 
