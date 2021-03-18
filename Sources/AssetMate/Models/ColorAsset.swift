@@ -4,11 +4,6 @@
 //
 
 struct ColorAsset: Codable {
-    struct Info: Codable {
-        let version: Int
-        let author: String
-    }
-
     struct Color: Codable {
         let color: ColorSpec
         let idiom: String
@@ -107,7 +102,7 @@ struct ColorAsset: Codable {
         }
     }
 
-    let info: Info
+    let info: AssetInfo
     let colors: [Color]
 }
 
@@ -124,7 +119,7 @@ extension ColorAsset {
             let b = String(clean[gEnd ..< bEnd])
             return (r: r, g: g, b: b)
         }()
-        info = .init(version: 1, author: "xcode")
+        info = .xcodeDefault()
         colors = [
             .init(
                 color: .init(
