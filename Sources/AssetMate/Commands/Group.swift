@@ -15,19 +15,20 @@ struct Group: ParsableCommand {
     var folder: String = "Colors"
 
     @Option(name: .shortAndLong, help: "Path to the Assets.xcassets folder")
-    var assets: String
+    var asset: Asset?
 
     @Flag(name: .shortAndLong, help: "Enable verbose logging")
     var verbose: Bool = false
 
     func run() throws {
         let manager = FileManager.default
-        let contents = try manager.contentsOfDirectory(atPath: assets)
+        let config = try load(asset)
+        let contents = try manager.contentsOfDirectory(atPath: config.asset)
         let inputFiles = contents.filter { $0.hasSuffix(".colorset") }
         guard !inputFiles.isEmpty else {
             throw CleanExit.message("Assets folder doesn't contain any color assets, aborting command")
         }
-        let originFolder = URL(fileURLWithPath: assets)
+        let originFolder = URL(fileURLWithPath: config.asset)
         let newFolder = originFolder.appendingPathComponent(folder)
         try manager.createDirectory(at: newFolder, withIntermediateDirectories: true)
         for file in inputFiles {
@@ -38,3 +39,5 @@ struct Group: ParsableCommand {
         }
     }
 }
+
+extension Group: AssetConfigLoader {}
