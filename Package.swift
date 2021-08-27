@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/marmelroy/Zip", .upToNextMinor(from: "2.1.1")),
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "AssetMate",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
