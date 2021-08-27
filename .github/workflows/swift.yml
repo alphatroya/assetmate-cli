@@ -11,11 +11,6 @@ jobs:
       with:
         xcode-version: latest-stable
 
-    - name: Select Xcode
-      run: |
-        sudo xcode-select -s /Applications/Xcode_12.5.app/Contents/Developer
-        xcodebuild -version
-
     - uses: actions/checkout@v1
 
     - name: Launch tests
