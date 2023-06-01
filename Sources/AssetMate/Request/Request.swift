@@ -29,11 +29,11 @@ final class RequestProvider {
                 defer {
                     semaphore.signal()
                 }
-                if let error = error {
+                if let error {
                     result = .failure(error)
                     return
                 }
-                guard let data = data else {
+                guard let data else {
                     result = .failure(RequestErrors.emptyData)
                     return
                 }

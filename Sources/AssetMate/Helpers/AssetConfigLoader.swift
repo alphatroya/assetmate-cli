@@ -16,7 +16,7 @@ extension AssetConfigLoader {
     }
 
     func load(_ asset: Asset?) throws -> Configuration {
-        if let asset = asset {
+        if let asset {
             return .init(asset: asset)
         }
         let url = URL(fileURLWithPath: configFileName)

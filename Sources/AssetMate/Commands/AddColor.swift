@@ -36,7 +36,7 @@ struct AddColor: ParsableCommand {
 
         let config = try load(asset)
         let folderURL = URL(fileURLWithPath: config.asset)
-        let name = self.name ?? response.name.value.kebab
+        let name = name ?? response.name.value.kebab
         let assetFolder = folderURL.appendingPathComponent(name + ".colorset")
 
         let fileManager = FileManager.default

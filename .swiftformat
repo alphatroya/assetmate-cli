@@ -1,4 +1,4 @@
---swiftversion 5.2
+--swiftversion 5.8
 --header strip
 --maxwidth 140
 --wraparguments before-first

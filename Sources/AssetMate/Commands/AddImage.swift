@@ -23,7 +23,7 @@ struct AddImage: ParsableCommand {
     var keep = false
 
     func run() throws {
-        var file = self.file
+        var file = file
         var unzipFolder: URL?
         if file.hasSuffix(".zip") {
             (file, unzipFolder) = try unzipFiles(file)
