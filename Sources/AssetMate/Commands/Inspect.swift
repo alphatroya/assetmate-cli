@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 import ArgumentParser
 import Foundation
 
@@ -53,7 +48,8 @@ struct Inspect: ParsableCommand {
                 continue
             }
             if firstAsset.color.components.compare(with: hex, tolerance: tolerance),
-                let name = directory.lastPathComponent.components(separatedBy: ".").first {
+               let name = directory.lastPathComponent.components(separatedBy: ".").first
+            {
                 if verbose {
                     print("Found directory: \(directory)")
                 } else {

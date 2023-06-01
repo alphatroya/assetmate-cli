@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 struct ImageAsset: Encodable {
     struct Image: Encodable {
         let filename: String

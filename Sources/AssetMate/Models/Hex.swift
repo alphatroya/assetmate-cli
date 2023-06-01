@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 import ArgumentParser
 
 private let hexRegexp = #"^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"#

@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 import Foundation
 
 struct Response: Decodable {

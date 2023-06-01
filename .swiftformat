@@ -1,5 +1,5 @@
 --swiftversion 5.2
---header "\nAssetMate\n{created.year} Alexey Korolev <alphatroya@gmail.com>\n//"
+--header strip
 --maxwidth 140
 --wraparguments before-first
 --wrapcollections before-first

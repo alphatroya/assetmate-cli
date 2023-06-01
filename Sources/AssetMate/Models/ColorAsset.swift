@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 struct ColorAsset: Codable {
     struct Color: Codable {
         let color: ColorSpec
@@ -49,8 +44,9 @@ struct ColorAsset: Codable {
 
             if isHex {
                 guard let hRed = Int(red.dropFirst(2), radix: 16),
-                    let hGreen = Int(green.dropFirst(2), radix: 16),
-                    let hBlue = Int(blue.dropFirst(2), radix: 16) else {
+                      let hGreen = Int(green.dropFirst(2), radix: 16),
+                      let hBlue = Int(blue.dropFirst(2), radix: 16)
+                else {
                     return false
                 }
                 oRed = hRed
@@ -58,8 +54,9 @@ struct ColorAsset: Codable {
                 oBlue = hBlue
             } else if isFloat {
                 guard let fRed = Double(red),
-                    let fGreen = Double(green),
-                    let fBlue = Double(blue) else {
+                      let fGreen = Double(green),
+                      let fBlue = Double(blue)
+                else {
                     return false
                 }
                 oRed = Int(fRed * 255)
@@ -67,8 +64,9 @@ struct ColorAsset: Codable {
                 oBlue = Int(fBlue * 255)
             } else {
                 guard let iRed = Int(red),
-                    let iGreen = Int(green),
-                    let iBlue = Int(blue) else {
+                      let iGreen = Int(green),
+                      let iBlue = Int(blue)
+                else {
                     return false
                 }
                 oRed = iRed
@@ -77,8 +75,9 @@ struct ColorAsset: Codable {
             }
 
             guard let red = hex.red,
-                let green = hex.green,
-                let blue = hex.blue else {
+                  let green = hex.green,
+                  let blue = hex.blue
+            else {
                 return false
             }
 

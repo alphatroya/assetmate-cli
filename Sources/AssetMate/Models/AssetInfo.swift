@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 struct AssetInfo: Codable {
     let version: Int
     let author: String

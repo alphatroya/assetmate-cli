@@ -1,8 +1,3 @@
-//
-// AssetMate
-// 2021 Alexey Korolev <alphatroya@gmail.com>
-//
-
 import ArgumentParser
 
 struct ConvertAlpha: ParsableCommand {
@@ -26,13 +21,15 @@ struct ConvertAlpha: ParsableCommand {
             throw ValidationError("Given alpha value not in the 0 ... 1 bounds")
         }
         guard let fRed = foreground.red,
-            let fGreen = foreground.green,
-            let fBlue = foreground.blue else {
+              let fGreen = foreground.green,
+              let fBlue = foreground.blue
+        else {
             throw ValidationError("Failed to convert foreground color to int value")
         }
         guard let bRed = background.red,
-            let bGreen = background.green,
-            let bBlue = background.blue else {
+              let bGreen = background.green,
+              let bBlue = background.blue
+        else {
             throw ValidationError("Failed to convert background color to int value")
         }
 
