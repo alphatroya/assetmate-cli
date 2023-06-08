@@ -10,16 +10,16 @@ struct AddImage: ParsableCommand {
     @Argument(help: "Path to the pdf, svg or zip file", completion: .file(extensions: ["pdf", "svg", "zip"]))
     var file: String
 
-    @Option(name: .shortAndLong, help: "Path to output Assets.xcassets folder", completion: .directory)
+    @Option(name: .shortAndLong, help: "A path to the output Assets.xcassets folder", completion: .directory)
     var asset: Asset?
 
-    @Option(name: .shortAndLong, help: "Name for a image asset")
+    @Option(name: .shortAndLong, help: "A name for the image asset")
     var name: String
 
-    @Flag(name: .shortAndLong, help: "Should overwrite file if it is exists")
+    @Flag(name: .shortAndLong, help: "Should overwrite file if it exists")
     var force = false
 
-    @Flag(name: .shortAndLong, help: "Should origin file not be removed after success")
+    @Flag(name: .shortAndLong, help: "Should origin file not to be removed after success")
     var keep = false
 
     func run() throws {
