@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "SwiftFormat",
+        "repositoryURL": "https://github.com/nicklockwood/SwiftFormat",
+        "state": {
+          "branch": null,
+          "revision": "29c5053c803d2f58716aa5028f6ef5e9fd397168",
+          "version": "0.51.11"
+        }
+      },
+      {
         "package": "Yams",
         "repositoryURL": "https://github.com/jpsim/Yams",
         "state": {

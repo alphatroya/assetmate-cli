@@ -4,10 +4,10 @@ import Zip
 
 struct AddImage: ParsableCommand {
     static var configuration = CommandConfiguration(
-        abstract: "Add given pdf or svg (origin or zip archived) file to the Asset catalog"
+        abstract: "Add a PDF or SVG file (optionally zip archived) to the Asset catalog"
     )
 
-    @Argument(help: "Path to the pdf, svg or zip file", completion: .file(extensions: ["pdf", "svg", "zip"]))
+    @Argument(help: "Path to the PDF, SVG or ZIP file", completion: .file(extensions: ["pdf", "svg", "zip"]))
     var file: String
 
     @Option(name: .shortAndLong, help: "A path to the output Assets.xcassets folder", completion: .directory)
