@@ -1,29 +1,27 @@
-# Asset Mate
+# AssetMate
 
 A couple of helpful tools for a working with assets in the XCode project.
 
-## Identify
+## identify
 
 Find a pretty name for a HEX color using www.thecolorapi.com API.
 
-## Add color
+## add-color
 
 Use name for a color from previous command and add it to the Assets.xcassets folder.
 
-## Inspect
+## inspect
 
 Search for a given color in the Assets.xcassets folder and print its name if founded.
 
-## Add image
+## add-image
 
-Add a new pdf or svg (standalone or zip archived) resource to the Assets.xcassets folder.
+Add a new pdf or svg (optionally zip archived) resource to the Assets.xcassets folder.
 
-## Convert alpha
+## convert-alpha
 
-Convert foreground color mixed with background with given alpha using linear interpolation.
-For cases when designers use alpha value with black colors for color adjustments.
+Convert a foreground color, mixed with a background, using a given alpha value through linear interpolation. This process is particularly useful when designers utilize an alpha value with black colors for color adjustments.
 
-## Group
+## group
 
 Group all color assets in the separate folder.
-
