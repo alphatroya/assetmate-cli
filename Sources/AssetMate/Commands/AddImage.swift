@@ -40,14 +40,11 @@ struct AddImage: ParsableCommand {
             throw ValidationError("That command support only pdf or svg files")
         }
 
-        let config = try load(asset)
-        let folder = URL(fileURLWithPath: config.asset)
-            .appendingPathComponent(name)
-            .appendingPathExtension("imageset")
+        let folder = try createIntermediateFolders(for: name)
         let manager = FileManager.default
         if manager.fileExists(atPath: folder.path) {
             if !force {
-                print("Folder \(name) already exists in Asset catalog", to: &stdErr)
+                print("Folder \(folder.path) already exists in Asset catalog", to: &stdErr)
                 throw ExitCode(1)
             } else {
                 try manager.removeItem(at: folder)
@@ -66,6 +63,22 @@ struct AddImage: ParsableCommand {
             destination: folder.appendingPathComponent(imagePath),
             removeOriginZip: unzipFolder != nil
         )
+    }
+
+    private func createIntermediateFolders(for name: String) throws -> URL {
+        let config = try load(asset)
+        var pathComponents = name.split(separator: ".").map { String($0) }
+        var url = URL(fileURLWithPath: config.asset)
+        while pathComponents.count > 1 {
+            var name = pathComponents[0]
+            name = String(name.prefix(1)).capitalized + String(name.dropFirst())
+            url = url.appendingPathComponent(name)
+            try createFolderContentsJson(at: url, withNamespace: true)
+            pathComponents = Array(pathComponents.dropFirst())
+        }
+        return url
+            .appendingPathComponent(pathComponents[0])
+            .appendingPathExtension("imageset")
     }
 
     private func completeTransaction(origin: URL, destination: URL, removeOriginZip: Bool) throws {

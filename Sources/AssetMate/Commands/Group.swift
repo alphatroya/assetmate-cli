@@ -28,8 +28,8 @@ struct Group: ParsableCommand {
         }
         let originFolder = URL(fileURLWithPath: config.asset)
         let newFolder = originFolder.appendingPathComponent(folder)
-        try createContentsJson(at: newFolder)
-        try manager.createDirectory(at: newFolder, withIntermediateDirectories: true)
+        try createFolderContentsJson(at: newFolder, withNamespace: namespace)
+
         for file in inputFiles {
             if verbose {
                 print("Moving \(file)")
@@ -37,13 +37,16 @@ struct Group: ParsableCommand {
             try manager.moveItem(at: originFolder.appendingPathComponent(file), to: newFolder.appendingPathComponent(file))
         }
     }
-
-    private func createContentsJson(at newFolder: URL) throws {
-        let groupAsset = GroupAsset(withNamespaces: namespace)
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(groupAsset)
-        try data.write(to: newFolder.appendingPathComponent("Contents.json"))
-    }
 }
 
 extension Group: AssetConfigLoader {}
+
+func createFolderContentsJson(at newFolder: URL, withNamespace: Bool) throws {
+    let manager = FileManager.default
+    try manager.createDirectory(at: newFolder, withIntermediateDirectories: true)
+
+    let groupAsset = GroupAsset(withNamespaces: withNamespace)
+    let encoder = JSONEncoder()
+    let data = try encoder.encode(groupAsset)
+    try data.write(to: newFolder.appendingPathComponent("Contents.json"))
+}
