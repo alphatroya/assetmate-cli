@@ -11,7 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "1.0.0")),
         .package(url: "https://github.com/jpsim/Yams", .upToNextMinor(from: "4.0.0")),
-        .package(url: "https://github.com/marmelroy/Zip", .upToNextMinor(from: "2.1.1")),
+        .package(url: "https://github.com/marmelroy/Zip", .upToNextMinor(from: "2.1.2")),
         .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.51.11"),
     ],
     targets: [
