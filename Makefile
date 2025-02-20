@@ -29,11 +29,6 @@ clean:
 test:
 	swift test
 
-.PHONY: fmt
-## fmt: reformat swift code
-fmt:
-	swift package plugin --allow-writing-to-package-directory swiftformat Sources Tests
-
 .PHONY: help
 ## help: prints out help message
 help:

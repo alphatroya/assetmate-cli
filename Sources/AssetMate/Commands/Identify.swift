@@ -1,4 +1,5 @@
 import ArgumentParser
+
 struct Identify: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "Identify given hex color name"
